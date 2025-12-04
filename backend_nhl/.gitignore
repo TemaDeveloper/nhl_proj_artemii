@@ -1,0 +1,8 @@
+.env
+node_modules/
+package-lock.json
+
+service-account-key.json
+
+.DS_Store
+.vscode/
