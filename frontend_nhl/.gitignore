@@ -44,6 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+**/ios/**/*.xcconfig
+/ios/Flutter/Debug.xcconfig
+/ios/Flutter/Release.xcconfig
 
 .env
 pubspec.lock
@@ -51,3 +54,5 @@ pubspec.lock
 /windows
 /web
 /macos
+
+*.g.dart
