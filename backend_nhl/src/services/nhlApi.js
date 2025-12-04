@@ -22,3 +22,14 @@ export const fetchGameDetails = async (gameId) => {
     return {};
   }
 };
+
+export const fetchTeamStandings = async (date) => {
+  try {
+    const url = `${NHL_API_BASE}/standings/${date}`;
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.warn(`WARN fetching standings for date ${date}. Status: ${error.response?.status || 'No Status'} - ${error.message}`);
+    return {};
+  }
+};

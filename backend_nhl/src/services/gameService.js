@@ -4,6 +4,8 @@ import { fetchGameDetails, fetchGameSchedule } from './nhlApi.js';
 import { transformGameData } from '../transformers/gameTransformer.js';
 import { getDateRange } from '../utils/dateUtils.js';
 import { GAMES_COLLECTION, GAME_STATES_FOR_DETAILS } from '../constants/index.js';
+// NEW IMPORT: Centralize the team ingestion call here
+import { ingestTeamData } from './teamService.js'; 
 
 /**
  * Processes a single game.
@@ -22,28 +24,38 @@ async function processGame(game) {
 }
 
 /**
- * Ingests game data for a specified number of days.
+ * Ingests both game data and team standings for a specified number of days.
+ * This is now the central ingestion coordinator.
  */
 export async function ingestGameData(days = 0) {
   const dates = getDateRange(days);
-  console.log(`\nStarting NHL data ingestion for dates: ${dates.join(', ')}`);
+  console.log(`\nStarting combined NHL data ingestion for ${dates.length} dates: ${dates.join(', ')}`);
 
   for (const date of dates) {
     try {
+      console.log(`\n======================================================`);
+      console.log(`Starting processing for date: ${date}`);
+      console.log(`======================================================`);
+      
+      // 1. INGEST TEAM STANDINGS FOR THE CURRENT DATE
+      // We assume ingestTeamData handles a single date (YYYY-MM-DD string)
+      await ingestTeamData(date); 
+      
+      // 2. INGEST GAME SCHEDULE AND DETAILS FOR THE CURRENT DATE
       const scheduleResponse = await fetchGameSchedule(date);
       
       const games = scheduleResponse.gameWeek?.flatMap(week => week.games) || [];
       
-      console.log(`\n-- Date: ${date} | Found ${games.length} games. --`);
+      console.log(`\n-- Game Schedule - Date: ${date} | Found ${games.length} games. --`);
       
       for (const game of games) {
         await processGame(game);
       }
       
     } catch (error) {
-      console.error(`\nERROR processing data for date ${date}: ${error.message}`);
+      console.error(`\n❌ CRITICAL ERROR processing data for date ${date}: ${error.message}`);
     }
   }
 
-  console.log('\nIngestion process finished.');
+  console.log('\nCombined Ingestion process finished.');
 }
