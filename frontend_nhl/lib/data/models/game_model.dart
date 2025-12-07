@@ -1,3 +1,4 @@
+// game_model.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend_nhl/converters/datetime_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -9,8 +10,8 @@ part 'game_model.g.dart';
 
 @JsonSerializable(explicitToJson: true, ignoreUnannotated: true)
 class GameModel {
-  @JsonKey(name: 'id')
-  final String id;
+  @JsonKey(name: 'gameId')
+  final String gameId;
 
   @JsonKey(name: 'homeTeamId')
   final String homeTeamId;
@@ -55,7 +56,7 @@ class GameModel {
   final DateTime? updatedAt;
 
   const GameModel({
-    required this.id,
+    required this.gameId,
     required this.homeTeamId,
     required this.awayTeamId,
     required this.homeTeamName,
@@ -71,31 +72,51 @@ class GameModel {
     this.updatedAt,
   });
 
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value is String) {
+      return DateTime.tryParse(value)?.toUtc();
+    }
+    if (value is Timestamp) {
+      return value.toDate().toUtc();
+    }
+    return null;
+  }
+
   /// Convert Firestore document to GameModel
   factory GameModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 
+    // Nested team data extraction
+    final Map<String, dynamic> homeTeamData =
+        (data['homeTeam'] as Map<String, dynamic>?) ?? {};
+    final Map<String, dynamic> awayTeamData =
+        (data['awayTeam'] as Map<String, dynamic>?) ?? {};
+
     return GameModel(
-      id: doc.id,
-      homeTeamId: data['homeTeamId'] ?? '',
-      awayTeamId: data['awayTeamId'] ?? '',
-      homeTeamName: data['homeTeamName'] ?? 'Unknown',
-      awayTeamName: data['awayTeamName'] ?? 'Unknown',
-      homeTeamScore: data['homeTeamScore'] ?? 0,
-      awayTeamScore: data['awayTeamScore'] ?? 0,
+      gameId: data['gameId']?.toString() ?? doc.id, 
+      
+      // Extracting nested data
+      homeTeamId: homeTeamData['id']?.toString() ?? '',
+      awayTeamId: awayTeamData['id']?.toString() ?? '',
+      homeTeamName: homeTeamData['name'] ?? 'Unknown',
+      awayTeamName: awayTeamData['name'] ?? 'Unknown',
+      homeTeamScore: (homeTeamData['score'] as num?)?.toInt() ?? 0,
+      awayTeamScore: (awayTeamData['score'] as num?)?.toInt() ?? 0,
+      
+      // status field is at top level
       status: GameStatus.fromString(data['status'] ?? 'scheduled'),
-      startTime: data['startTime'] != null
-          ? (data['startTime'] as Timestamp).toDate()
-          : DateTime.now(),
-      venue: data['venue'],
-      homeTeamLogo: data['homeTeamLogo'],
-      awayTeamLogo: data['awayTeamLogo'],
-      createdAt: data['createdAt'] != null
-          ? (data['createdAt'] as Timestamp).toDate()
-          : null,
-      updatedAt: data['updatedAt'] != null
-          ? (data['updatedAt'] as Timestamp).toDate()
-          : null,
+      
+      // Use the static helper method
+      startTime: _parseDateTime(data['startTime']) ?? DateTime.now().toUtc(),
+
+      // These fields are not present in your sample, defaulting to null
+      venue: data['venue'] as String?,
+      homeTeamLogo: homeTeamData['logoUrl'] as String?,
+      awayTeamLogo: awayTeamData['logoUrl'] as String?,
+      
+      // Handle createdAt/updatedAt which might be Timestamp objects
+      createdAt: _parseDateTime(data['createdAt']),
+      updatedAt: _parseDateTime(data['updatedAt']),
     );
   }
 
@@ -106,7 +127,7 @@ class GameModel {
 
   Game toEntity() {
     return Game(
-      id: id,
+      id: gameId,
       homeTeamId: homeTeamId,
       awayTeamId: awayTeamId,
       homeTeamName: homeTeamName,
@@ -124,7 +145,7 @@ class GameModel {
   }
 
   GameModel copyWith({
-    String? id,
+    String? gameId,
     String? homeTeamId,
     String? awayTeamId,
     String? homeTeamName,
@@ -140,7 +161,7 @@ class GameModel {
     DateTime? updatedAt,
   }) {
     return GameModel(
-      id: id ?? this.id,
+      gameId: gameId ?? this.gameId,
       homeTeamId: homeTeamId ?? this.homeTeamId,
       awayTeamId: awayTeamId ?? this.awayTeamId,
       homeTeamName: homeTeamName ?? this.homeTeamName,
@@ -160,7 +181,7 @@ class GameModel {
   @override
   String toString() {
     return '''GameModel(
-      id: $id,
+      id: $gameId,
       homeTeamName: $homeTeamName,
       awayTeamName: $awayTeamName,
       status: ${status.toDisplayString()},

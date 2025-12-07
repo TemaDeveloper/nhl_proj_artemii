@@ -56,3 +56,9 @@ pubspec.lock
 /macos
 
 *.g.dart
+
+firebase.json
+
+/android/app/google-services.json
+/ios/Podfile.lock
+/ios/Runner/GoogleService-Info.plist
