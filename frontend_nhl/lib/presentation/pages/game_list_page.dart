@@ -1,19 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend_nhl/config/routes/app_navigation.dart';
+import 'package:frontend_nhl/config/routes/app_router.gr.dart';
 import 'package:frontend_nhl/di/injector_container.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/presentation/bloc/games/games_bloc.dart';
 import 'package:frontend_nhl/presentation/widgets/game_card.dart';
 
-@RoutePage(name: "GameListRoute")
+@RoutePage()
 class GameListPage extends StatelessWidget {
   const GameListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // Use dependency injection instead of manual instantiation
       create: (_) => getIt<GamesBloc>()..add(const FetchTodayGamesEvent()),
       child: const _GamesListView(),
     );
@@ -23,30 +24,47 @@ class GameListPage extends StatelessWidget {
 class _GamesListView extends StatelessWidget {
   const _GamesListView();
 
+  void _handleNavigation(BuildContext context, GameNavigation navigation) {
+    switch (navigation) {
+      case GameNavOpenDetail(gameId: final gameId):
+        context.router.push(
+          GameDetailRoute(gameId: gameId), 
+        );
+      // Add other navigation cases here if needed
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('NHL Today'),
-        centerTitle: true,
-        backgroundColor: Colors.blue.shade800,
-        foregroundColor: Colors.white,
-      ),
-      body: BlocBuilder<GamesBloc, GamesState>(
-        builder: (context, state) {
-          return switch (state) {
-            GamesInitial() || GamesLoading() => 
-              const Center(child: CircularProgressIndicator()),
-            
-            GamesError(:final message) => 
-              _ErrorView(message: message),
-            
-            GamesLoaded(:final games) || GamesRefreshing(:final games) => 
-              games.isEmpty 
-                ? const _EmptyGamesView() 
-                : _GamesList(games: games),
-          };
-        },
+    return BlocListener<GamesBloc, GamesState>(
+      listener: (context, state) {
+        if (state.doNavigation != null) {
+          _handleNavigation(context, state.doNavigation!);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('NHL Today'),
+          centerTitle: true,
+          backgroundColor: Colors.blue.shade800,
+          foregroundColor: Colors.white,
+        ),
+        body: BlocBuilder<GamesBloc, GamesState>(
+          builder: (context, state) {
+            return switch (state) {
+              GamesInitial() || GamesLoading() => 
+                const Center(child: CircularProgressIndicator()),
+              
+              GamesError(:final message) => 
+                _ErrorView(message: message),
+              
+              GamesLoaded(:final games) || GamesRefreshing(:final games) => 
+                games.isEmpty 
+                  ? const _EmptyGamesView() 
+                  : _GamesList(games: games),
+            };
+          },
+        ),
       ),
     );
   }

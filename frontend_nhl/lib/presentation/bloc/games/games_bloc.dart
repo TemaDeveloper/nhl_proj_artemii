@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:frontend_nhl/config/routes/app_navigation.dart'; // Contains GameNavigation
 import 'package:frontend_nhl/core/utils/logger.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/domain/usecases/get_today_games_usecase.dart';
@@ -15,7 +16,9 @@ class GamesBloc extends Bloc<GamesEvent, GamesState> {
   GamesBloc(this._getTodayGamesUseCase) : super(const GamesInitial()) {
     on<FetchTodayGamesEvent>(_onFetchTodayGames);
     on<RefreshGamesEvent>(_onRefreshGames);
+    on<GamesCardTappedEvent>(_onGamesCardTapped); 
   }
+
 
   Future<void> _onFetchTodayGames(
     FetchTodayGamesEvent event,
@@ -50,14 +53,39 @@ class GamesBloc extends Bloc<GamesEvent, GamesState> {
   ) async {
     AppLogger.info('Refreshing games', tag: 'GamesBloc');
     
-    // Keep current state while refreshing
     if (state is GamesLoaded) {
       final currentGames = (state as GamesLoaded).games;
       emit(GamesRefreshing(games: currentGames));
     }
 
-    // Re-fetch games
     add(const FetchTodayGamesEvent());
+  }
+  
+  void _onGamesCardTapped(
+    GamesCardTappedEvent event,
+    Emitter<GamesState> emit,
+  ) {
+    if (state is GamesLoaded) {
+      final currentState = state as GamesLoaded;
+      
+      emit(currentState.copyWith(
+        doNavigation: GameNavOpenDetail(gameId: event.gameId),
+      ));
+      
+      emit(currentState.copyWith(
+        doNavigation: null,
+      ));
+    } else if (state is GamesRefreshing) {
+      final currentState = state as GamesRefreshing;
+      
+      emit(currentState.copyWith(
+        doNavigation: GameNavOpenDetail(gameId: event.gameId),
+      ));
+      
+      emit(currentState.copyWith(
+        doNavigation: null,
+      ));
+    }
   }
 
   @override

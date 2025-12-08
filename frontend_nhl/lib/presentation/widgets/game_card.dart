@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_nhl/core/utils/date_time_utils.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/data/models/game_status.dart';
+import 'package:frontend_nhl/presentation/bloc/games/games_bloc.dart';
 
 /// Card widget displaying a single game summary.
 class GameCard extends StatelessWidget {
@@ -18,8 +20,9 @@ class GameCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          // TODO: Navigate to game details
-          // AutoRouter.of(context).push(GameDetailRoute(gameId: game.id));
+          context.read<GamesBloc>().add(
+            GamesCardTappedEvent(gameId: game.id),
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(16.0),

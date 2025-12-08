@@ -8,4 +8,6 @@ abstract class GameRepository {
   /// Stream of all games (no date filter).
   Stream<List<Game>> getAllGames();
 
+  Future<Game?> getGameById(String gameId);
+
 }

@@ -14,3 +14,11 @@ class FetchTodayGamesEvent extends GamesEvent {
 final class RefreshGamesEvent extends GamesEvent {
   const RefreshGamesEvent();
 }
+
+final class GamesCardTappedEvent extends GamesEvent {
+  final String gameId;
+  const GamesCardTappedEvent({required this.gameId});
+
+  @override
+  List<Object> get props => [gameId];
+}

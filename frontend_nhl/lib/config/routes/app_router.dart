@@ -10,14 +10,14 @@ import 'app_router.gr.dart';
 
 @singleton
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
-class AppRouter extends RootStackRouter {
+class AppRouter extends $AppRouter {
 @override
   List<AutoRoute> get routes => [
         // 1. Game List Screen (Home)
         AutoRoute(page: GameListRoute.page, path: '/', initial: true),
         
-        // // 2. Game Detail Screen (for later)
-        // AutoRoute(page: GameDetailRoute.page, path: '/games/:gameId'),
+        // 2. Game Detail Screen (for later)
+        AutoRoute(page: GameDetailRoute.page, path: '/games/:gameId'),
         
         // // 3. Team Screen (for later)
         // AutoRoute(page: TeamRoute.page, path: '/teams/:teamId'),

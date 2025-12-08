@@ -7,7 +7,6 @@ import 'package:frontend_nhl/data/models/game_model.dart';
 import 'package:frontend_nhl/data/repositories/game_repository.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 
-/// Firestore implementation of the GameRepository.
 class FirestoreGameRepository implements GameRepository {
   final FirebaseFirestore _firestore;
   final String _collectionPath;

@@ -1,49 +1,70 @@
 part of 'games_bloc.dart';
 
-/// Base class for all Games states.
 sealed class GamesState extends Equatable {
-  const GamesState();
+  final GameNavigation? doNavigation;
+  const GamesState({this.doNavigation});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [doNavigation];
 }
 
-/// Initial state before any data is fetched.
 final class GamesInitial extends GamesState {
-  const GamesInitial();
+  const GamesInitial({super.doNavigation});
+
+  @override
+  List<Object?> get props => [doNavigation];
 }
 
-/// Loading state when fetching games for the first time.
 final class GamesLoading extends GamesState {
-  const GamesLoading();
+  const GamesLoading({super.doNavigation});
+
+  @override
+  List<Object?> get props => [doNavigation];
 }
 
-/// State when games are successfully loaded.
 final class GamesLoaded extends GamesState {
   final List<Game> games;
 
-  const GamesLoaded({required this.games});
+  const GamesLoaded({required this.games, super.doNavigation});
+
+  GamesLoaded copyWith({
+    List<Game>? games,
+    GameNavigation? doNavigation,
+  }) {
+    return GamesLoaded(
+      games: games ?? this.games,
+      doNavigation: doNavigation,
+    );
+  }
 
   @override
-  List<Object?> get props => [games];
+  List<Object?> get props => [games, doNavigation];
 }
 
-/// State when refreshing games (shows current data while loading new).
 final class GamesRefreshing extends GamesState {
   final List<Game> games;
 
-  const GamesRefreshing({required this.games});
+  const GamesRefreshing({required this.games, super.doNavigation});
+
+  GamesRefreshing copyWith({
+    List<Game>? games,
+    GameNavigation? doNavigation,
+  }) {
+    return GamesRefreshing(
+      games: games ?? this.games,
+      doNavigation: doNavigation,
+    );
+  }
 
   @override
-  List<Object?> get props => [games];
+  List<Object?> get props => [games, doNavigation];
 }
 
-/// Error state with descriptive message.
 final class GamesError extends GamesState {
   final String message;
 
-  const GamesError({required this.message});
+  const GamesError({required this.message, super.doNavigation});
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, doNavigation];
 }
