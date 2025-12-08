@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend_nhl/config/routes/app_navigation.dart';
+import 'package:frontend_nhl/config/routes/app_router.gr.dart';
 import 'package:frontend_nhl/core/utils/date_time_utils.dart';
 import 'package:frontend_nhl/di/injector_container.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
@@ -10,17 +12,28 @@ import 'package:frontend_nhl/presentation/bloc/game_detail/game_detail_bloc.dart
 class GameDetailPage extends StatelessWidget {
   final String gameId;
 
-  const GameDetailPage({
-    super.key,
-    @PathParam('gameId') required this.gameId,
-  });
+  const GameDetailPage({super.key, @PathParam('gameId') required this.gameId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<GameDetailBloc>()
         ..add(FetchGameDetailEvent(gameId: gameId)),
-      child: const _GameDetailView(),
+      
+      child: BlocListener<GameDetailBloc, GameDetailState>(
+        // Only listen when a navigation event is present
+        listenWhen: (previous, current) => current.doNavigation != null,
+        listener: (context, state) {
+          final nav = state.doNavigation;
+          
+          if (nav is TeamNavOpenDetail) {
+            // Execute the AutoRoute navigation to the Team page
+            context.pushRoute(TeamRoute(teamId: nav.teamId));
+          }
+        },
+        // The main view (Scaffold) is the child
+        child: const _GameDetailView(),
+      ),
     );
   }
 }
@@ -40,12 +53,11 @@ class _GameDetailView extends StatelessWidget {
       body: BlocBuilder<GameDetailBloc, GameDetailState>(
         builder: (context, state) {
           return switch (state) {
-            GameDetailInitial() || GameDetailLoading() =>
-              const Center(child: CircularProgressIndicator()),
-            GameDetailError(:final message) =>
-              _ErrorView(message: message),
-            GameDetailLoaded(:final game) || GameDetailRefreshing(:final game) =>
-              _GameDetailContent(game: game),
+            GameDetailInitial() ||
+            GameDetailLoading() => const Center(child: CircularProgressIndicator()),
+            GameDetailError(:final message) => _ErrorView(message: message),
+            GameDetailLoaded(:final game) ||
+            GameDetailRefreshing(:final game) => _GameDetailContent(game: game),
           };
         },
       ),
@@ -121,9 +133,7 @@ class _GameStatusCard extends StatelessWidget {
             ),
             Text(
               DateTimeUtils.formatTime(game.startTime),
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
             ),
           ],
         ),
@@ -200,9 +210,7 @@ class _TeamScoreRow extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Colors.grey[600],
-                ),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.grey[600]),
               ),
               const SizedBox(height: 4),
               Text(
@@ -240,30 +248,15 @@ class _GameInfoCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Game Information',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('Game Information', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 16),
-            _InfoRow(
-              label: 'Game ID',
-              value: game.id,
-            ),
+            _InfoRow(label: 'Game ID', value: game.id),
             const Divider(height: 24),
-            _InfoRow(
-              label: 'Venue',
-              value: game.venue ?? 'N/A',
-            ),
+            _InfoRow(label: 'Venue', value: game.venue ?? 'N/A'),
             const Divider(height: 24),
-            _InfoRow(
-              label: 'Home Team ID',
-              value: game.homeTeamId,
-            ),
+            _InfoRow(label: 'Home Team ID', value: game.homeTeamId),
             const Divider(height: 24),
-            _InfoRow(
-              label: 'Away Team ID',
-              value: game.awayTeamId,
-            ),
+            _InfoRow(label: 'Away Team ID', value: game.awayTeamId),
             if (game.status.isFinal && !game.isTie) ...[
               const Divider(height: 24),
               _InfoRow(
@@ -274,11 +267,7 @@ class _GameInfoCard extends StatelessWidget {
             ],
             if (game.status.isFinal && game.isTie) ...[
               const Divider(height: 24),
-              _InfoRow(
-                label: 'Result',
-                value: 'Tie Game',
-                valueColor: Colors.orange.shade700,
-              ),
+              _InfoRow(label: 'Result', value: 'Tie Game', valueColor: Colors.orange.shade700),
             ],
           ],
         ),
@@ -292,11 +281,7 @@ class _InfoRow extends StatelessWidget {
   final String value;
   final Color? valueColor;
 
-  const _InfoRow({
-    required this.label,
-    required this.value,
-    this.valueColor,
-  });
+  const _InfoRow({required this.label, required this.value, this.valueColor});
 
   @override
   Widget build(BuildContext context) {
@@ -305,17 +290,14 @@ class _InfoRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.grey[600],
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
         ),
         Flexible(
           child: Text(
             value,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: valueColor,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600, color: valueColor),
             textAlign: TextAlign.end,
             overflow: TextOverflow.ellipsis,
           ),
@@ -339,21 +321,18 @@ class _TeamNavigationCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'View Team Details',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('View Team Details', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 16),
             _TeamButton(
-              teamName: game.homeTeamName,
-              teamId: game.homeTeamId,
-              label: 'Home Team',
+              teamName: game.homeTeamName, 
+              teamAbbrev: game.homeTeamName,
+              label: 'Home Team'
             ),
             const SizedBox(height: 12),
             _TeamButton(
-              teamName: game.awayTeamName,
-              teamId: game.awayTeamId,
-              label: 'Away Team',
+              teamName: game.awayTeamName, 
+              teamAbbrev: game.awayTeamName, // CHANGE: Get abbreviation
+              label: 'Away Team'
             ),
           ],
         ),
@@ -364,26 +343,22 @@ class _TeamNavigationCard extends StatelessWidget {
 
 class _TeamButton extends StatelessWidget {
   final String teamName;
-  final String teamId;
+  final String teamAbbrev; // CHANGE: Use teamAbbrev instead of teamId
   final String label;
 
   const _TeamButton({
-    required this.teamName,
-    required this.teamId,
-    required this.label,
+    required this.teamName, 
+    required this.teamAbbrev, // CHANGE
+    required this.label
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        // TODO: Navigate to team page
-        // AutoRouter.of(context).push(TeamRoute(teamId: teamId));
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Team page for $teamName (ID: $teamId) - Coming soon!'),
-            duration: const Duration(seconds: 2),
-          ),
+        print('Team ID: $teamAbbrev'); 
+        context.read<GameDetailBloc>().add(
+          TeamTappedEvent(teamId: teamAbbrev), 
         );
       },
       style: ElevatedButton.styleFrom(
@@ -398,20 +373,11 @@ class _TeamButton extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 4),
                 Text(
                   teamName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -439,10 +405,7 @@ class _ErrorView extends StatelessWidget {
           children: [
             Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
             const SizedBox(height: 16),
-            Text(
-              'Game Not Found',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('Game Not Found', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(
               message,

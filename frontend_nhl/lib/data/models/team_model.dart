@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend_nhl/converters/datetime_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -32,10 +33,10 @@ class TeamModel {
 
   @JsonKey(name: 'overtimeLosses')
   final int? overtimeLosses;
-  
+
   @JsonKey(name: 'points')
   final int points;
-  
+
   @JsonKey(name: 'gamesPlayed')
   final int totalGames;
 
@@ -71,28 +72,80 @@ class TeamModel {
     this.updatedAt,
   });
 
-  factory TeamModel.fromStandings(Map<String, dynamic> json) {
+  factory TeamModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    final rawData = data['raw'] as Map<String, dynamic>? ?? {};
+
+    // Helper function to safely parse integers
+    int parseToInt(dynamic value) {
+      if (value == null) return 0;
+      if (value is int) return value;
+      if (value is String) {
+        try {
+          return int.tryParse(value) ?? 0;
+        } catch (e) {
+          return 0;
+        }
+      }
+      if (value is double) return value.toInt();
+      return 0;
+    }
+
+    // Helper function to safely parse doubles
+    double parseToDouble(dynamic value) {
+      if (value == null) return 0.0;
+      if (value is double) return value;
+      if (value is int) return value.toDouble();
+      if (value is String) {
+        try {
+          return double.tryParse(value) ?? 0.0;
+        } catch (e) {
+          return 0.0;
+        }
+      }
+      return 0.0;
+    }
+
+    // Extract place name - it's nested: placeName: {default: Utah}
+    final placeNameMap = rawData['placeName'] as Map<String, dynamic>?;
+    final placeName = placeNameMap?['default']?.toString() ?? 'Unknown City';
+
+    // Extract team abbreviation - it's nested: teamAbbrev: {default: UTA}
+    final teamAbbrevMap = rawData['teamAbbrev'] as Map<String, dynamic>?;
+    final teamAbbrev = teamAbbrevMap?['default']?.toString() ?? data['id']?.toString() ?? 'UNK';
+
+    // Calculate total wins and losses from home/road
+    final homeWins = parseToInt(rawData['homeWins']);
+    final roadWins = parseToInt(rawData['roadWins']);
+    final homeLosses = parseToInt(rawData['homeLosses']);
+    final roadLosses = parseToInt(rawData['roadLosses']);
+    
+    final totalWins = homeWins + roadWins;
+    final totalLosses = homeLosses + roadLosses;
+    final totalGames = parseToInt(data['totalGames']);
+
     return TeamModel(
-      id: json['teamAbbrev']?['default']?.toString() ?? 'unknown',
-      name: json['teamName']?['default']?.toString() ?? 'Unknown Team',
-      city: json['placeName']?['default']?.toString() ?? 'Unknown City',
-      logo: json['teamLogo']?.toString(), 
-      conference: json['conferenceName']?.toString(),
-      division: json['divisionName']?.toString(),
-      wins: json['wins'] ?? 0,
-      losses: json['losses'] ?? 0,
-      overtimeLosses: json['otLosses'] ?? 0, 
-      points: json['points'] ?? 0,
-      totalGames: json['gamesPlayed'] ?? 0,
-      winPercentage: (json['winPctg'] as num?)?.toDouble() ?? 0.0,
-      pointsPercentage: (json['pointPctg'] as num?)?.toDouble() ?? 0.0,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
+      id: data['id']?.toString() ?? doc.id,
+      name: '$placeName $teamAbbrev', // e.g., "Utah UTA"
+      city: placeName, // e.g., "Utah"
+      conference: rawData['conferenceName']?.toString(), // Might be null in your data
+      division: rawData['divisionName']?.toString(), // e.g., "Central"
+      wins: totalWins,
+      losses: totalLosses,
+      overtimeLosses: parseToInt(rawData['otLosses']),
+      points: parseToInt(data['points']),
+      totalGames: totalGames,
+      pointsPercentage: parseToDouble(data['pointsPercentage']),
+      winPercentage: totalGames > 0 ? totalWins / totalGames : 0.0,
+      logo: rawData['teamLogo']?.toString(),
+      // These might not be in your Firestore data
+      createdAt: null,
+      updatedAt: null,
     );
   }
 
-  factory TeamModel.fromJson(Map<String, dynamic> json) =>
-      _$TeamModelFromJson(json);
+  // Constructor for JSON serialization (for API calls if needed)
+  factory TeamModel.fromJson(Map<String, dynamic> json) => _$TeamModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TeamModelToJson(this);
 
@@ -116,7 +169,7 @@ class TeamModel {
     );
   }
 
-    TeamModel copyWith({
+  TeamModel copyWith({
     String? id,
     String? name,
     String? city,
@@ -157,10 +210,13 @@ class TeamModel {
     final entity = toEntity();
     return '''TeamModel(
       id: $id,
-      fullName: ${entity.fullName},
+      fullName: ${entity.name},
       record: ${entity.recordString},
       conference: $conference,
       division: $division,
+      wins: $wins,
+      losses: $losses,
+      points: $points,
     )''';
   }
 }

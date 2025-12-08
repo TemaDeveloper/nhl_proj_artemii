@@ -19,7 +19,7 @@ void main() async {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  AppRouter get _appRouter => GetIt.instance<AppRouter>();
+  //AppRouter get _appRouter => GetIt.instance<AppRouter>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
           child: child,
         );
       },
-      routerConfig: _appRouter.config(),
+      routerConfig: AppRouter().config(),
     );
   }
 }

@@ -37,8 +37,6 @@ class Team extends Equatable {
     this.updatedAt,
   });
 
-  String get fullName => '$city $name';
-
   String get recordString {
     if (overtimeLosses != null && overtimeLosses! > 0) {
       return '$wins-$losses-$overtimeLosses';

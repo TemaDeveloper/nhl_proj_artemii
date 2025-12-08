@@ -20,6 +20,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: GameDetailRoute.page, path: '/games/:gameId'),
         
         // // 3. Team Screen (for later)
-        // AutoRoute(page: TeamRoute.page, path: '/teams/:teamId'),
+        AutoRoute(page: TeamRoute.page, path: '/teams/:teamId'),
       ];
-}
+} 

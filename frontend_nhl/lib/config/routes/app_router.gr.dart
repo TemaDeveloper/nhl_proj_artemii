@@ -8,22 +8,23 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:flutter/material.dart' as _i4;
+import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:flutter/material.dart' as _i5;
 import 'package:frontend_nhl/presentation/pages/game_detail_page.dart' as _i1;
 import 'package:frontend_nhl/presentation/pages/game_list_page.dart' as _i2;
+import 'package:frontend_nhl/presentation/pages/team_page.dart' as _i3;
 
-abstract class $AppRouter extends _i3.RootStackRouter {
+abstract class $AppRouter extends _i4.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i3.PageFactory> pagesMap = {
+  final Map<String, _i4.PageFactory> pagesMap = {
     GameDetailRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<GameDetailRouteArgs>(
           orElse: () =>
               GameDetailRouteArgs(gameId: pathParams.getString('gameId')));
-      return _i3.AutoRoutePage<dynamic>(
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.GameDetailPage(
           key: args.key,
@@ -32,9 +33,21 @@ abstract class $AppRouter extends _i3.RootStackRouter {
       );
     },
     GameListRoute.name: (routeData) {
-      return _i3.AutoRoutePage<dynamic>(
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i2.GameListPage(),
+      );
+    },
+    TeamRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<TeamRouteArgs>(
+          orElse: () => TeamRouteArgs(teamId: pathParams.getString('teamId')));
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i3.TeamPage(
+          key: args.key,
+          teamId: args.teamId,
+        ),
       );
     },
   };
@@ -42,11 +55,11 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
 /// generated route for
 /// [_i1.GameDetailPage]
-class GameDetailRoute extends _i3.PageRouteInfo<GameDetailRouteArgs> {
+class GameDetailRoute extends _i4.PageRouteInfo<GameDetailRouteArgs> {
   GameDetailRoute({
-    _i4.Key? key,
+    _i5.Key? key,
     required String gameId,
-    List<_i3.PageRouteInfo>? children,
+    List<_i4.PageRouteInfo>? children,
   }) : super(
           GameDetailRoute.name,
           args: GameDetailRouteArgs(
@@ -59,8 +72,8 @@ class GameDetailRoute extends _i3.PageRouteInfo<GameDetailRouteArgs> {
 
   static const String name = 'GameDetailRoute';
 
-  static const _i3.PageInfo<GameDetailRouteArgs> page =
-      _i3.PageInfo<GameDetailRouteArgs>(name);
+  static const _i4.PageInfo<GameDetailRouteArgs> page =
+      _i4.PageInfo<GameDetailRouteArgs>(name);
 }
 
 class GameDetailRouteArgs {
@@ -69,7 +82,7 @@ class GameDetailRouteArgs {
     required this.gameId,
   });
 
-  final _i4.Key? key;
+  final _i5.Key? key;
 
   final String gameId;
 
@@ -81,8 +94,8 @@ class GameDetailRouteArgs {
 
 /// generated route for
 /// [_i2.GameListPage]
-class GameListRoute extends _i3.PageRouteInfo<void> {
-  const GameListRoute({List<_i3.PageRouteInfo>? children})
+class GameListRoute extends _i4.PageRouteInfo<void> {
+  const GameListRoute({List<_i4.PageRouteInfo>? children})
       : super(
           GameListRoute.name,
           initialChildren: children,
@@ -90,5 +103,44 @@ class GameListRoute extends _i3.PageRouteInfo<void> {
 
   static const String name = 'GameListRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.TeamPage]
+class TeamRoute extends _i4.PageRouteInfo<TeamRouteArgs> {
+  TeamRoute({
+    _i5.Key? key,
+    required String teamId,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
+          TeamRoute.name,
+          args: TeamRouteArgs(
+            key: key,
+            teamId: teamId,
+          ),
+          rawPathParams: {'teamId': teamId},
+          initialChildren: children,
+        );
+
+  static const String name = 'TeamRoute';
+
+  static const _i4.PageInfo<TeamRouteArgs> page =
+      _i4.PageInfo<TeamRouteArgs>(name);
+}
+
+class TeamRouteArgs {
+  const TeamRouteArgs({
+    this.key,
+    required this.teamId,
+  });
+
+  final _i5.Key? key;
+
+  final String teamId;
+
+  @override
+  String toString() {
+    return 'TeamRouteArgs{key: $key, teamId: $teamId}';
+  }
 }

@@ -1,6 +1,5 @@
 part of 'game_detail_bloc.dart';
 
-/// Base class for all GameDetail events.
 sealed class GameDetailEvent extends Equatable {
   const GameDetailEvent();
 
@@ -26,4 +25,13 @@ final class RefreshGameDetailEvent extends GameDetailEvent {
 
   @override
   List<Object?> get props => [gameId];
+}
+
+final class TeamTappedEvent extends GameDetailEvent {
+  final String teamId;
+
+  const TeamTappedEvent({required this.teamId});
+
+  @override
+  List<Object?> get props => [teamId];
 }

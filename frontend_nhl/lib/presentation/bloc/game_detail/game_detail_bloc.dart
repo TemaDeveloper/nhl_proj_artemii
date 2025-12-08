@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:frontend_nhl/config/routes/app_navigation.dart';
 import 'package:frontend_nhl/core/utils/logger.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/domain/usecases/get_game_detail_usecase.dart';
@@ -15,6 +16,7 @@ class GameDetailBloc extends Bloc<GameDetailEvent, GameDetailState> {
   GameDetailBloc(this._getGameDetailUseCase) : super(const GameDetailInitial()) {
     on<FetchGameDetailEvent>(_onFetchGameDetail);
     on<RefreshGameDetailEvent>(_onRefreshGameDetail);
+    on<TeamTappedEvent>(_onTeamTapped);
   }
 
   Future<void> _onFetchGameDetail(
@@ -75,6 +77,33 @@ class GameDetailBloc extends Bloc<GameDetailEvent, GameDetailState> {
 
     // Re-fetch game
     add(FetchGameDetailEvent(gameId: event.gameId));
+  }
+
+  void _onTeamTapped(
+    TeamTappedEvent event,
+    Emitter<GameDetailState> emit,
+  ) {
+    if (state is GameDetailLoaded) {
+      final currentState = state as GameDetailLoaded;
+      
+      emit(currentState.copyWith(
+        doNavigation: TeamNavOpenDetail(teamId: event.teamId),
+      ));
+      
+      emit(currentState.copyWith(
+        doNavigation: null,
+      ));
+    } else if (state is GameDetailRefreshing) {
+      final currentState = state as GameDetailRefreshing;
+      
+      emit(currentState.copyWith(
+        doNavigation: TeamNavOpenDetail(teamId: event.teamId),
+      ));
+      
+      emit(currentState.copyWith(
+        doNavigation: null,
+      ));
+    }
   }
 
   @override
