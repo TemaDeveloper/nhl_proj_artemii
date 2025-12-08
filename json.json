@@ -1,0 +1,2110 @@
+
+awayTeam
+(map)
+abbrev "VAN"
+(string)
+darkLogoUrl "https://assets.nhle.com/logos/nhl/svg/VAN_dark.svg"
+(string)
+id 23
+(number)
+logoUrl "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg"
+(string)
+name "VAN"
+(string)
+score 1
+(number)
+gameId 2025020401
+(number)
+homeTeam
+(map)
+abbrev "LAK"
+(string)
+darkLogoUrl "https://assets.nhle.com/logos/nhl/svg/LAK_dark.svg"
+(string)
+id 26
+(number)
+logoUrl "https://assets.nhle.com/logos/nhl/svg/LAK_light.svg"
+(string)
+name "LAK"
+(string)
+score 2
+(number)
+raw
+(map)
+boxscore
+(map)
+awayTeam
+(map)
+abbrev "VAN"
+(string)
+commonName
+(map)
+default "Canucks"
+(string)
+darkLogo "https://assets.nhle.com/logos/nhl/svg/VAN_dark.svg"
+(string)
+id 23
+(number)
+logo "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg"
+(string)
+placeName
+(map)
+default "Vancouver"
+(string)
+placeNameWithPreposition
+(map)
+default "Vancouver"
+(string)
+fr "de Vancouver"
+(string)
+score 1
+(number)
+sog 20
+(number)
+clock
+(map)
+inIntermission false
+(boolean)
+running true
+(boolean)
+secondsRemaining 62
+(number)
+timeRemaining "01:02"
+(string)
+easternUTCOffset "-05:00"
+(string)
+gameDate "2025-11-29"
+(string)
+gameOutcome
+(map)
+lastPeriodType "OT"
+(string)
+otPeriods 1
+(number)
+gameScheduleState "OK"
+(string)
+gameState "OFF"
+(string)
+gameType 2
+(number)
+homeTeam
+(map)
+abbrev "LAK"
+(string)
+commonName
+(map)
+default "Kings"
+(string)
+darkLogo "https://assets.nhle.com/logos/nhl/svg/LAK_dark.svg"
+(string)
+id 26
+(number)
+logo "https://assets.nhle.com/logos/nhl/svg/LAK_light.svg"
+(string)
+placeName
+(map)
+default "Los Angeles"
+(string)
+placeNameWithPreposition
+(map)
+default "Los Angeles"
+(string)
+fr "de Los Angeles"
+(string)
+score 2
+(number)
+sog 23
+(number)
+id 2025020401
+(number)
+limitedScoring false
+(boolean)
+periodDescriptor
+(map)
+maxRegulationPeriods 3
+(number)
+number 4
+(number)
+periodType "OT"
+(string)
+playerByGameStats
+(map)
+awayTeam
+(map)
+defense
+(array)
+0
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "T. Willander"
+(string)
+pim 0
+(number)
+playerId 8484240
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 17
+(number)
+sog 1
+(number)
+sweaterNumber 5
+(number)
+takeaways 0
+(number)
+toi "13:21"
+(string)
+1
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "P. Joseph"
+(string)
+pim 0
+(number)
+playerId 8480058
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 15
+(number)
+sog 0
+(number)
+sweaterNumber 7
+(number)
+takeaways 0
+(number)
+toi "09:23"
+(string)
+2
+(map)
+assists 0
+(number)
+blockedShots 2
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 2
+(number)
+name
+(map)
+default "F. Hronek"
+(string)
+pim 0
+(number)
+playerId 8479425
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 30
+(number)
+sog 2
+(number)
+sweaterNumber 17
+(number)
+takeaways 0
+(number)
+toi "26:02"
+(string)
+3
+(map)
+assists 0
+(number)
+blockedShots 3
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "M. Pettersson"
+(string)
+pim 0
+(number)
+playerId 8477969
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 29
+(number)
+sog 0
+(number)
+sweaterNumber 29
+(number)
+takeaways 0
+(number)
+toi "21:51"
+(string)
+4
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "Q. Hughes"
+(string)
+pim 0
+(number)
+playerId 8480800
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 29
+(number)
+sog 0
+(number)
+sweaterNumber 43
+(number)
+takeaways 1
+(number)
+toi "30:13"
+(string)
+5
+(map)
+assists 1
+(number)
+blockedShots 3
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "T. Myers"
+(string)
+pim 0
+(number)
+playerId 8474574
+(number)
+plusMinus 0
+(number)
+points 1
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 27
+(number)
+sog 0
+(number)
+sweaterNumber 57
+(number)
+takeaways 2
+(number)
+toi "19:37"
+(string)
+forwards
+(array)
+0
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "B. Boeser"
+(string)
+pim 0
+(number)
+playerId 8478444
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 22
+(number)
+sog 3
+(number)
+sweaterNumber 6
+(number)
+takeaways 0
+(number)
+toi "20:21"
+(string)
+1
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "A. Bains"
+(string)
+pim 0
+(number)
+playerId 8483395
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 13
+(number)
+sog 0
+(number)
+sweaterNumber 13
+(number)
+takeaways 0
+(number)
+toi "07:38"
+(string)
+2
+(map)
+assists 1
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 1
+(number)
+giveaways 2
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "D. O'Connor"
+(string)
+pim 0
+(number)
+playerId 8482055
+(number)
+plusMinus 0
+(number)
+points 1
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 20
+(number)
+sog 0
+(number)
+sweaterNumber 18
+(number)
+takeaways 0
+(number)
+toi "13:25"
+(string)
+3
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "J. Lekkerimäki"
+(string)
+pim 0
+(number)
+playerId 8483476
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 19
+(number)
+sog 1
+(number)
+sweaterNumber 23
+(number)
+takeaways 0
+(number)
+toi "13:24"
+(string)
+4
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0.545455
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "E. Pettersson"
+(string)
+pim 0
+(number)
+playerId 8480012
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 30
+(number)
+sog 1
+(number)
+sweaterNumber 40
+(number)
+takeaways 1
+(number)
+toi "21:07"
+(string)
+5
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 3
+(number)
+name
+(map)
+default "K. Sherwood"
+(string)
+pim 0
+(number)
+playerId 8480748
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 24
+(number)
+sog 3
+(number)
+sweaterNumber 44
+(number)
+takeaways 1
+(number)
+toi "20:08"
+(string)
+6
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0.625
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 3
+(number)
+name
+(map)
+cs "A. Räty"
+(string)
+default "A. Raty"
+(string)
+fi "A. Räty"
+(string)
+sk "A. Räty"
+(string)
+sv "A. Räty"
+(string)
+pim 2
+(number)
+playerId 8482691
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 16
+(number)
+sog 2
+(number)
+sweaterNumber 54
+(number)
+takeaways 0
+(number)
+toi "10:15"
+(string)
+7
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0.5
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "M. Sasson"
+(string)
+pim 2
+(number)
+playerId 8484136
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 18
+(number)
+sog 2
+(number)
+sweaterNumber 63
+(number)
+takeaways 0
+(number)
+toi "11:47"
+(string)
+8
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0.5
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+cs "D. Kämpf"
+(string)
+default "D. Kampf"
+(string)
+fi "D. Kämpf"
+(string)
+sk "D. Kämpf"
+(string)
+sv "D. Kämpf"
+(string)
+pim 0
+(number)
+playerId 8480144
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 20
+(number)
+sog 1
+(number)
+sweaterNumber 64
+(number)
+takeaways 0
+(number)
+toi "14:59"
+(string)
+9
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 1
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "J. DeBrusk"
+(string)
+pim 0
+(number)
+playerId 8478498
+(number)
+plusMinus 1
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 25
+(number)
+sog 0
+(number)
+sweaterNumber 74
+(number)
+takeaways 0
+(number)
+toi "19:44"
+(string)
+10
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 1
+(number)
+hits 2
+(number)
+name
+(map)
+default "E. Kane"
+(string)
+pim 4
+(number)
+playerId 8475169
+(number)
+plusMinus 1
+(number)
+points 1
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 25
+(number)
+sog 3
+(number)
+sweaterNumber 91
+(number)
+takeaways 1
+(number)
+toi "18:50"
+(string)
+11
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0.666667
+(number)
+giveaways 2
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "L. Karlsson"
+(string)
+pim 0
+(number)
+playerId 8481024
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 16
+(number)
+sog 1
+(number)
+sweaterNumber 94
+(number)
+takeaways 0
+(number)
+toi "11:49"
+(string)
+goalies
+(array)
+0
+(map)
+decision "O"
+(string)
+evenStrengthGoalsAgainst 2
+(number)
+evenStrengthShotsAgainst "12/14"
+(string)
+goalsAgainst 2
+(number)
+name
+(map)
+default "K. Lankinen"
+(string)
+pim 0
+(number)
+playerId 8480947
+(number)
+position "G"
+(string)
+powerPlayGoalsAgainst 0
+(number)
+powerPlayShotsAgainst "7/7"
+(string)
+savePctg 0.913043
+(number)
+saveShotsAgainst "21/23"
+(string)
+saves 21
+(number)
+shorthandedGoalsAgainst 0
+(number)
+shorthandedShotsAgainst "2/2"
+(string)
+shotsAgainst 23
+(number)
+starter true
+(boolean)
+sweaterNumber 32
+(number)
+toi "63:58"
+(string)
+1
+(map)
+evenStrengthGoalsAgainst 0
+(number)
+evenStrengthShotsAgainst "0/0"
+(string)
+goalsAgainst 0
+(number)
+name
+(map)
+default "N. Tolopilo"
+(string)
+pim 0
+(number)
+playerId 8484268
+(number)
+position "G"
+(string)
+powerPlayGoalsAgainst 0
+(number)
+powerPlayShotsAgainst "0/0"
+(string)
+saveShotsAgainst "0/0"
+(string)
+saves 0
+(number)
+shorthandedGoalsAgainst 0
+(number)
+shorthandedShotsAgainst "0/0"
+(string)
+shotsAgainst 0
+(number)
+starter false
+(boolean)
+sweaterNumber 60
+(number)
+toi "00:00"
+(string)
+homeTeam
+(map)
+defense
+(array)
+0
+(map)
+assists 1
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "B. Dumoulin"
+(string)
+pim 0
+(number)
+playerId 8475208
+(number)
+plusMinus 1
+(number)
+points 1
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 27
+(number)
+sog 1
+(number)
+sweaterNumber 2
+(number)
+takeaways 0
+(number)
+toi "21:47"
+(string)
+1
+(map)
+assists 0
+(number)
+blockedShots 3
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "C. Ceci"
+(string)
+pim 0
+(number)
+playerId 8476879
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 21
+(number)
+sog 0
+(number)
+sweaterNumber 5
+(number)
+takeaways 1
+(number)
+toi "16:40"
+(string)
+2
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 4
+(number)
+goals 0
+(number)
+hits 3
+(number)
+name
+(map)
+default "J. Edmundson"
+(string)
+pim 0
+(number)
+playerId 8476441
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 26
+(number)
+sog 0
+(number)
+sweaterNumber 6
+(number)
+takeaways 0
+(number)
+toi "21:36"
+(string)
+3
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "J. Moverare"
+(string)
+pim 0
+(number)
+playerId 8479421
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 9
+(number)
+sog 0
+(number)
+sweaterNumber 43
+(number)
+takeaways 0
+(number)
+toi "07:38"
+(string)
+4
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "M. Anderson"
+(string)
+pim 0
+(number)
+playerId 8479998
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 26
+(number)
+sog 0
+(number)
+sweaterNumber 44
+(number)
+takeaways 0
+(number)
+toi "21:55"
+(string)
+5
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 2
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "B. Clarke"
+(string)
+pim 0
+(number)
+playerId 8482730
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "D"
+(string)
+powerPlayGoals 0
+(number)
+shifts 23
+(number)
+sog 3
+(number)
+sweaterNumber 92
+(number)
+takeaways 1
+(number)
+toi "20:37"
+(string)
+forwards
+(array)
+0
+(map)
+assists 1
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 1
+(number)
+hits 1
+(number)
+name
+(map)
+default "A. Kempe"
+(string)
+pim 0
+(number)
+playerId 8477960
+(number)
+plusMinus 2
+(number)
+points 2
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 21
+(number)
+sog 3
+(number)
+sweaterNumber 9
+(number)
+takeaways 0
+(number)
+toi "18:19"
+(string)
+1
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "C. Perry"
+(string)
+pim 0
+(number)
+playerId 8470621
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 12
+(number)
+sog 2
+(number)
+sweaterNumber 10
+(number)
+takeaways 0
+(number)
+toi "11:26"
+(string)
+2
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0.541667
+(number)
+giveaways 0
+(number)
+goals 1
+(number)
+hits 0
+(number)
+name
+(map)
+default "A. Kopitar"
+(string)
+pim 0
+(number)
+playerId 8471685
+(number)
+plusMinus 1
+(number)
+points 1
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 23
+(number)
+sog 3
+(number)
+sweaterNumber 11
+(number)
+takeaways 0
+(number)
+toi "19:12"
+(string)
+3
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "T. Moore"
+(string)
+pim 0
+(number)
+playerId 8479675
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 21
+(number)
+sog 2
+(number)
+sweaterNumber 12
+(number)
+takeaways 0
+(number)
+toi "16:43"
+(string)
+4
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 2
+(number)
+name
+(map)
+default "A. Laferriere"
+(string)
+pim 0
+(number)
+playerId 8482155
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 21
+(number)
+sog 3
+(number)
+sweaterNumber 14
+(number)
+takeaways 0
+(number)
+toi "19:42"
+(string)
+5
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "A. Turcotte"
+(string)
+pim 2
+(number)
+playerId 8481532
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 16
+(number)
+sog 0
+(number)
+sweaterNumber 15
+(number)
+takeaways 0
+(number)
+toi "09:45"
+(string)
+6
+(map)
+assists 1
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 3
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "K. Fiala"
+(string)
+pim 4
+(number)
+playerId 8477942
+(number)
+plusMinus 2
+(number)
+points 1
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 22
+(number)
+sog 1
+(number)
+sweaterNumber 22
+(number)
+takeaways 0
+(number)
+toi "20:30"
+(string)
+7
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 0.538462
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 1
+(number)
+name
+(map)
+default "P. Danault"
+(string)
+pim 0
+(number)
+playerId 8476479
+(number)
+plusMinus -1
+(number)
+points 0
+(number)
+position "C"
+(string)
+powerPlayGoals 0
+(number)
+shifts 17
+(number)
+sog 1
+(number)
+sweaterNumber 24
+(number)
+takeaways 1
+(number)
+toi "15:39"
+(string)
+8
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 5
+(number)
+name
+(map)
+default "J. Malott"
+(string)
+pim 0
+(number)
+playerId 8482408
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 13
+(number)
+sog 1
+(number)
+sweaterNumber 39
+(number)
+takeaways 0
+(number)
+toi "10:15"
+(string)
+9
+(map)
+assists 0
+(number)
+blockedShots 1
+(number)
+faceoffWinningPctg 1
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "J. Armia"
+(string)
+pim 0
+(number)
+playerId 8476469
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 23
+(number)
+sog 2
+(number)
+sweaterNumber 40
+(number)
+takeaways 1
+(number)
+toi "16:59"
+(string)
+10
+(map)
+assists 1
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0.461538
+(number)
+giveaways 0
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "Q. Byfield"
+(string)
+pim 0
+(number)
+playerId 8482124
+(number)
+plusMinus 1
+(number)
+points 1
+(number)
+position "R"
+(string)
+powerPlayGoals 0
+(number)
+shifts 23
+(number)
+sog 0
+(number)
+sweaterNumber 55
+(number)
+takeaways 0
+(number)
+toi "22:07"
+(string)
+11
+(map)
+assists 0
+(number)
+blockedShots 0
+(number)
+faceoffWinningPctg 0
+(number)
+giveaways 1
+(number)
+goals 0
+(number)
+hits 0
+(number)
+name
+(map)
+default "A. Kuzmenko"
+(string)
+pim 0
+(number)
+playerId 8483808
+(number)
+plusMinus 0
+(number)
+points 0
+(number)
+position "L"
+(string)
+powerPlayGoals 0
+(number)
+shifts 15
+(number)
+sog 1
+(number)
+sweaterNumber 96
+(number)
+takeaways 0
+(number)
+toi "15:45"
+(string)
+goalies
+(array)
+0
+(map)
+decision "W"
+(string)
+evenStrengthGoalsAgainst 1
+(number)
+evenStrengthShotsAgainst "15/16"
+(string)
+goalsAgainst 1
+(number)
+name
+(map)
+default "A. Forsberg"
+(string)
+pim 0
+(number)
+playerId 8476341
+(number)
+position "G"
+(string)
+powerPlayGoalsAgainst 0
+(number)
+powerPlayShotsAgainst "4/4"
+(string)
+savePctg 0.95
+(number)
+saveShotsAgainst "19/20"
+(string)
+saves 19
+(number)
+shorthandedGoalsAgainst 0
+(number)
+shorthandedShotsAgainst "0/0"
+(string)
+shotsAgainst 20
+(number)
+starter true
+(boolean)
+sweaterNumber 31
+(number)
+toi "63:17"
+(string)
+1
+(map)
+evenStrengthGoalsAgainst 0
+(number)
+evenStrengthShotsAgainst "0/0"
+(string)
+goalsAgainst 0
+(number)
+name
+(map)
+default "D. Kuemper"
+(string)
+pim 0
+(number)
+playerId 8475311
+(number)
+position "G"
+(string)
+powerPlayGoalsAgainst 0
+(number)
+powerPlayShotsAgainst "0/0"
+(string)
+saveShotsAgainst "0/0"
+(string)
+saves 0
+(number)
+shorthandedGoalsAgainst 0
+(number)
+shorthandedShotsAgainst "0/0"
+(string)
+shotsAgainst 0
+(number)
+starter false
+(boolean)
+sweaterNumber 35
+(number)
+toi "00:00"
+(string)
+regPeriods 3
+(number)
+season 20252026
+(number)
+startTimeUTC "2025-11-30T03:00:00Z"
+(string)
+summary
+(map)
+tvBroadcasts
+(array)
+0
+(map)
+countryCode "CA"
+(string)
+id 4
+(number)
+market "N"
+(string)
+network "CBC"
+(string)
+sequenceNumber 25
+(number)
+1
+(map)
+countryCode "CA"
+(string)
+id 286
+(number)
+market "N"
+(string)
+network "CITY"
+(string)
+sequenceNumber 26
+(number)
+2
+(map)
+countryCode "CA"
+(string)
+id 282
+(number)
+market "N"
+(string)
+network "SN"
+(string)
+sequenceNumber 101
+(number)
+3
+(map)
+countryCode "CA"
+(string)
+id 284
+(number)
+market "N"
+(string)
+network "SN1"
+(string)
+sequenceNumber 102
+(number)
+4
+(map)
+countryCode "CA"
+(string)
+id 283
+(number)
+market "N"
+(string)
+network "SN360"
+(string)
+sequenceNumber 103
+(number)
+5
+(map)
+countryCode "CA"
+(string)
+id 281
+(number)
+market "N"
+(string)
+network "TVAS"
+(string)
+sequenceNumber 109
+(number)
+6
+(map)
+countryCode "US"
+(string)
+id 564
+(number)
+market "H"
+(string)
+network "FDSNW"
+(string)
+sequenceNumber 279
+(number)
+7
+(map)
+countryCode "US"
+(string)
+id 22
+(number)
+market "H"
+(string)
+network "KCAL"
+(string)
+sequenceNumber 655
+(number)
+venue
+(map)
+default "Crypto.com Arena"
+(string)
+venueLocation
+(map)
+default "Los Angeles"
+(string)
+venueUTCOffset "-08:00"
+(string)
+schedule
+(map)
+awayTeam
+(map)
+abbrev "VAN"
+(string)
+awaySplitSquad false
+(boolean)
+commonName
+(map)
+default "Canucks"
+(string)
+darkLogo "https://assets.nhle.com/logos/nhl/svg/VAN_dark.svg"
+(string)
+id 23
+(number)
+logo "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg"
+(string)
+placeName
+(map)
+default "Vancouver"
+(string)
+placeNameWithPreposition
+(map)
+default "Vancouver"
+(string)
+fr "de Vancouver"
+(string)
+score 1
+(number)
+condensedGame "/video/van-at-lak-condensed-game-6385757257112"
+(string)
+condensedGameFr "/fr/video/match-condense-canucks-kings-29-11-2025-6385756263112"
+(string)
+easternUTCOffset "-05:00"
+(string)
+gameCenterLink "/gamecenter/van-vs-lak/2025/11/29/2025020401"
+(string)
+gameOutcome
+(map)
+lastPeriodType "OT"
+(string)
+gameScheduleState "OK"
+(string)
+gameState "OFF"
+(string)
+gameType 2
+(number)
+homeTeam
+(map)
+abbrev "LAK"
+(string)
+commonName
+(map)
+default "Kings"
+(string)
+darkLogo "https://assets.nhle.com/logos/nhl/svg/LAK_dark.svg"
+(string)
+homeSplitSquad false
+(boolean)
+id 26
+(number)
+logo "https://assets.nhle.com/logos/nhl/svg/LAK_light.svg"
+(string)
+placeName
+(map)
+default "Los Angeles"
+(string)
+placeNameWithPreposition
+(map)
+default "Los Angeles"
+(string)
+fr "de Los Angeles"
+(string)
+score 2
+(number)
+id 2025020401
+(number)
+neutralSite false
+(boolean)
+periodDescriptor
+(map)
+maxRegulationPeriods 3
+(number)
+number 4
+(number)
+periodType "OT"
+(string)
+season 20252026
+(number)
+startTimeUTC "2025-11-30T03:00:00Z"
+(string)
+threeMinRecap "/video/van-at-lak-recap-6385757444112"
+(string)
+threeMinRecapFr "/fr/video/van-vs-lak-29-11-2025-resume-6385755786112"
+(string)
+tvBroadcasts
+(array)
+0
+(map)
+countryCode "CA"
+(string)
+id 4
+(number)
+market "N"
+(string)
+network "CBC"
+(string)
+sequenceNumber 25
+(number)
+1
+(map)
+countryCode "CA"
+(string)
+id 286
+(number)
+market "N"
+(string)
+network "CITY"
+(string)
+sequenceNumber 26
+(number)
+2
+(map)
+countryCode "CA"
+(string)
+id 282
+(number)
+market "N"
+(string)
+network "SN"
+(string)
+sequenceNumber 101
+(number)
+3
+(map)
+countryCode "CA"
+(string)
+id 284
+(number)
+market "N"
+(string)
+network "SN1"
+(string)
+sequenceNumber 102
+(number)
+4
+(map)
+countryCode "CA"
+(string)
+id 283
+(number)
+market "N"
+(string)
+network "SN360"
+(string)
+sequenceNumber 103
+(number)
+5
+(map)
+countryCode "CA"
+(string)
+id 281
+(number)
+market "N"
+(string)
+network "TVAS"
+(string)
+sequenceNumber 109
+(number)
+6
+(map)
+countryCode "US"
+(string)
+id 564
+(number)
+market "H"
+(string)
+network "FDSNW"
+(string)
+sequenceNumber 279
+(number)
+7
+(map)
+countryCode "US"
+(string)
+id 22
+(number)
+market "H"
+(string)
+network "KCAL"
+(string)
+sequenceNumber 655
+(number)
+venue
+(map)
+default "Crypto.com Arena"
+(string)
+venueTimezone "America/Los_Angeles"
+(string)
+venueUTCOffset "-08:00"
+(string)
+winningGoalScorer
+(map)
+firstInitial
+(map)
+default "A."
+(string)
+lastName
+(map)
+default "Kempe"
+(string)
+playerId 8477960
+(number)
+winningGoalie
+(map)
+firstInitial
+(map)
+default "A."
+(string)
+lastName
+(map)
+default "Forsberg"
+(string)
+playerId 8476341
+(number)
+startTime "2025-11-30T03:00:00Z"
+(string)
+status "OFF"
+(string)
+updatedAt December 4, 2025 at 1:59:13 AM UTC-5 
