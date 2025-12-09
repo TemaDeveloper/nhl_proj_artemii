@@ -24,7 +24,6 @@ class FirestoreTeamRepository implements TeamRepository {
         throw Exception('Team with ID $teamId not found.');
       }
 
-      // ADD THIS LOG:
       AppLogger.info('Team data from Firestore: ${doc.data()}', tag: 'TeamRepository');
 
       final model = TeamModel.fromFirestore(doc);
@@ -38,7 +37,6 @@ class FirestoreTeamRepository implements TeamRepository {
     }
   }
 
-  /// Centralized error logging for fetch failures.
   void _logFetchError(String docId, dynamic error, StackTrace stackTrace) {
     AppLogger.error(
       'Failed to fetch team document: $docId',

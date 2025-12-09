@@ -1,8 +1,6 @@
 class DateTimeUtils {
-  DateTimeUtils._(); // Private constructor to prevent instantiation
+  DateTimeUtils._(); 
 
-  /// Get the start and end of today in the local timezone,
-  /// converted to UTC for database queries.
   static DateRange getTodayDateRange() {
     final now = DateTime.now();
     final startOfDay = DateTime(now.year, now.month, now.day);

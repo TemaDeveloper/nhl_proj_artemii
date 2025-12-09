@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:frontend_nhl/core/constants/app_constants.dart';
+import 'package:frontend_nhl/core/theme/app_colors.dart';
+import 'package:frontend_nhl/core/theme/app_text_styles.dart';
 import 'package:frontend_nhl/di/injector_container.dart';
 import 'package:frontend_nhl/domain/entities/team.dart';
 import 'package:frontend_nhl/presentation/bloc/team/team_bloc.dart';
@@ -11,7 +15,7 @@ class TeamPage extends StatelessWidget {
 
   const TeamPage({
     super.key,
-    @pathParam required this.teamId, 
+    @PathParam('teamId') required this.teamId,
   });
 
   @override
@@ -21,8 +25,6 @@ class TeamPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Team Details (ID: $teamId)'),
-          backgroundColor: Colors.blue.shade800,
-          foregroundColor: Colors.white,
         ),
         body: BlocBuilder<TeamBloc, TeamState>(
           builder: (context, state) {
@@ -50,12 +52,12 @@ class _TeamDetailsView extends StatelessWidget {
 
   Widget _buildStatRow(BuildContext context, String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: AppConstants.standardGap),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: Theme.of(context).textTheme.bodyLarge),
-          Text(value, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+          Text(label, style: AppTextStyles.bodyLarge),
+          Text(value, style: AppTextStyles.bodyLarge),
         ],
       ),
     );
@@ -69,37 +71,42 @@ class _TeamDetailsView extends StatelessWidget {
           final games = state.games;
           
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(AppConstants.defaultVerticalPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Center(
-                  child: Text(
+                SvgPicture.network(
+                  team.logo!,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.contain,
+                ),
+                Text(
                     team.name, 
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                    style: AppTextStyles.displayMedium,
                     textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: 24),
+                
+                const SizedBox(height: AppConstants.xlargeGap),
                 _buildStatRow(context, 'Conference', team.conference ?? 'N/A'),
                 _buildStatRow(context, 'Division', team.division ?? 'N/A'),
                 const Divider(height: 32),
-                Text('Record:', style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(height: 8),
+                Text('Record:', style: AppTextStyles.titleLarge),
+                const SizedBox(height: AppConstants.standardGap),
                 _buildStatRow(context, 'Total Games Played', team.totalGames.toString()),
                 _buildStatRow(context, 'Wins (W)', team.wins.toString()),
                 _buildStatRow(context, 'Losses (L)', team.losses.toString()),
                 _buildStatRow(context, 'Points (PTS)', team.points.toString()),
                 const Divider(height: 32),
-                Text('Last Played Games:', style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(height: 8),
+                Text('Last Played Games:', style: AppTextStyles.titleLarge),
+                const SizedBox(height: AppConstants.standardGap),
                 if (games.isEmpty)
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(AppConstants.largeGap),
                     child: Center(
                       child: Text(
                         'No games played yet',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: AppTextStyles.bodyMedium,
                       ),
                     ),
                   )
@@ -117,9 +124,9 @@ class _TeamDetailsView extends StatelessWidget {
                       final isWin = teamScore > opponentScore;
                       
                       return Card(
-                        margin: const EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: AppConstants.standardGap),
                         child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(AppConstants.largeGap),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -129,16 +136,12 @@ class _TeamDetailsView extends StatelessWidget {
                                   children: [
                                     Text(
                                       isHomeTeam ? 'HOME vs $opponent' : 'AWAY @ $opponent',
-                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: AppTextStyles.labelLarge,
                                     ),
-                                    const SizedBox(height: 4),
+                                    const SizedBox(height: AppConstants.standardGap),
                                     Text(
                                       game.startTime.toString().split(' ')[0],
-                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        color: Colors.grey,
-                                      ),
+                                      style: AppTextStyles.bodySmall,
                                     ),
                                   ],
                                 ),
@@ -147,16 +150,15 @@ class _TeamDetailsView extends StatelessWidget {
                                 children: [
                                   Text(
                                     '$teamScore - $opponentScore',
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: isWin ? Colors.green : Colors.red,
+                                    style: AppTextStyles.titleLarge.copyWith(
+                                      fontSize: 28,
+                                      color: isWin ? AppColors.winColor : AppColors.lossColor,
                                     ),
                                   ),
                                   Text(
                                     isWin ? 'W' : 'L',
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: isWin ? Colors.green : Colors.red,
-                                      fontWeight: FontWeight.bold,
+                                    style: AppTextStyles.labelMedium.copyWith(
+                                      color: isWin ? AppColors.winColor : AppColors.lossColor,
                                     ),
                                   ),
                                 ],

@@ -34,7 +34,6 @@ class FirestoreGameRepository implements GameRepository {
         .map(_mapSnapshotToGames);
   }
 
-  @override
   Stream<List<Game>> getGamesByDateRange(DateTime start, DateTime end) {
     // Convert to UTC ISO strings for Firestore query
     final startString = start.toUtc().toIso8601String();
@@ -88,8 +87,6 @@ class FirestoreGameRepository implements GameRepository {
   Stream<List<Game>> getTeamGames(String teamId) {
     AppLogger.info('Fetching games for team: $teamId', tag: 'GameRepository');
     
-    // Since Firestore doesn't efficiently support querying nested fields,
-    // we fetch ALL games and filter them in memory
     return _firestore
         .collection(_collectionPath)
         .orderBy('startTime', descending: true)
@@ -101,11 +98,10 @@ class FirestoreGameRepository implements GameRepository {
             tag: 'GameRepository',
           );
           
-          // Log first few raw status values to see what's in Firestore
           if (snapshot.docs.isNotEmpty) {
             final statusCounts = <String, int>{};
             for (var doc in snapshot.docs) {
-              final data = doc.data() as Map<String, dynamic>;
+              final data = doc.data();
               final status = data['status'] ?? 'UNKNOWN';
               statusCounts[status.toString()] = (statusCounts[status.toString()] ?? 0) + 1;
             }
@@ -118,7 +114,6 @@ class FirestoreGameRepository implements GameRepository {
           return _mapSnapshotToGames(snapshot);
         })
         .map((allGames) {
-          // Debug: Check what team IDs we have in the games
           final uniqueTeamIds = <String>{};
           for (var game in allGames) {
             uniqueTeamIds.add(game.homeTeamId);
@@ -129,13 +124,11 @@ class FirestoreGameRepository implements GameRepository {
             tag: 'GameRepository',
           );
           
-          // Debug: Check if the teamId we're looking for is in the list
           AppLogger.debug(
             'Looking for team ID: "$teamId" - exists: ${uniqueTeamIds.contains(teamId)}',
             tag: 'GameRepository',
           );
           
-          // First filter: games for this team
           final gamesForTeam = allGames
               .where((game) => game.homeTeamId == teamId || game.awayTeamId == teamId)
               .toList();
@@ -145,7 +138,6 @@ class FirestoreGameRepository implements GameRepository {
             tag: 'GameRepository',
           );
           
-          // Debug: Count games by status
           if (gamesForTeam.isNotEmpty) {
             final gameCounts = <String, int>{};
             for (var game in gamesForTeam) {
@@ -158,10 +150,9 @@ class FirestoreGameRepository implements GameRepository {
             );
           }
           
-          // Filter games where the game has been played (status is final or live)
           final teamGames = gamesForTeam
               .where((game) => game.status.isFinal || game.status.isLive)
-              .take(5) // Take only the 5 most recent
+              .take(5) 
               .toList();
           
           AppLogger.info(
@@ -173,7 +164,6 @@ class FirestoreGameRepository implements GameRepository {
         });
   }
 
-  /// Helper method to map Firestore snapshot to list of Game entities.
   List<Game> _mapSnapshotToGames(QuerySnapshot snapshot) {
     AppLogger.debug(
       'Received ${snapshot.docs.length} documents from Firestore',
@@ -201,7 +191,6 @@ class FirestoreGameRepository implements GameRepository {
     return games;
   }
 
-  /// Centralized error logging for deserialization failures.
   void _logDeserializationError(
     String docId,
     dynamic error,

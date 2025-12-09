@@ -11,7 +11,6 @@ class AppLogger {
   static const String _magenta = '\x1B[35m';
   static const String _cyan = '\x1B[36m';
 
-  /// Log a debug message (verbose, for development only).
   static void debug(String message, {String? tag}) {
     if (kDebugMode) {
       final prefix = tag != null ? '[$tag]' : '[DEBUG]';
@@ -19,7 +18,6 @@ class AppLogger {
     }
   }
 
-  /// Log an informational message.
   static void info(String message, {String? tag}) {
     if (kDebugMode) {
       final prefix = tag != null ? '[$tag]' : '[INFO]';
@@ -27,7 +25,6 @@ class AppLogger {
     }
   }
 
-  /// Log a warning message.
   static void warning(String message, {String? tag}) {
     if (kDebugMode) {
       final prefix = tag != null ? '[$tag]' : '[WARNING]';
@@ -35,7 +32,6 @@ class AppLogger {
     }
   }
 
-  /// Log an error message.
   static void error(
     String message, {
     String? tag,
@@ -55,11 +51,9 @@ class AppLogger {
       }
     }
     
-    // In production, send to crash reporting service
-    // FirebaseCrashlytics.instance.recordError(error, stackTrace);
+
   }
 
-  /// Log a success message.
   static void success(String message, {String? tag}) {
     if (kDebugMode) {
       final prefix = tag != null ? '[$tag]' : '[SUCCESS]';
@@ -67,7 +61,6 @@ class AppLogger {
     }
   }
 
-  /// Log a network request.
   static void network(String method, String url, {int? statusCode}) {
     if (kDebugMode) {
       final status = statusCode != null ? ' [$statusCode]' : '';
@@ -75,7 +68,6 @@ class AppLogger {
     }
   }
 
-  /// Log a Firestore query.
   static void firestore(String operation, String collection, {Map<String, dynamic>? params}) {
     if (kDebugMode) {
       final paramsStr = params != null ? ' ${params.toString()}' : '';
@@ -83,14 +75,12 @@ class AppLogger {
     }
   }
 
-  /// Log a divider for better readability.
   static void divider() {
     if (kDebugMode) {
       debugPrint('$_magenta${'=' * 60}$_reset');
     }
   }
 
-  /// Log a section header.
   static void section(String title) {
     if (kDebugMode) {
       divider();

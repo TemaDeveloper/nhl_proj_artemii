@@ -17,7 +17,6 @@ class Game extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   
-  // New fields from JSON
   final String? homeTeamAbbrev;
   final String? awayTeamAbbrev;
   final String? homeTeamCommonName;
@@ -25,28 +24,24 @@ class Game extends Equatable {
   final String? homeTeamPlaceName;
   final String? awayTeamPlaceName;
   
-  // Game state fields
   final String? periodTimeRemaining;
   final String? clockTimeRemaining;
   final bool? isIntermission;
   final bool? isClockRunning;
   
-  // Period descriptor
   final int? currentPeriodNumber;
   final String? currentPeriodType;
   final int? maxRegulationPeriods;
   final String? lastPeriodType;
   final int? otPeriods;
   
-  // Game outcome
   final String? winningGoalie;
   final String? winningGoalScorer;
-  final String? losingGoalieDecision; // "O" for Overtime loss, etc.
+  final String? losingGoalieDecision;
   
-  // Team statistics
-  final int? homeTeamSog; // Shots on Goal
+  final int? homeTeamSog; 
   final int? awayTeamSog;
-  final int? homeTeamPim; // Penalty Minutes
+  final int? homeTeamPim; 
   final int? awayTeamPim;
   final int? homeTeamHits;
   final int? awayTeamHits;
@@ -57,7 +52,6 @@ class Game extends Equatable {
   final int? homeTeamTakeaways;
   final int? awayTeamTakeaways;
   
-  // Goalie stats
   final double? homeGoalieSavePctg;
   final double? awayGoalieSavePctg;
   final int? homeGoalieSaves;
@@ -65,7 +59,6 @@ class Game extends Equatable {
   final int? homeGoalieShotsAgainst;
   final int? awayGoalieShotsAgainst;
   
-  // Game info
   final String? gameCenterLink;
   final String? condensedGameLink;
   final String? threeMinRecapLink;
@@ -73,10 +66,8 @@ class Game extends Equatable {
   final int? gameType;
   final int? season;
   
-  // TV broadcasts
   final List<TVBroadcast>? tvBroadcasts;
   
-  // Player stats (simplified - you might want separate entities)
   final List<PlayerStat>? homeTeamPlayerStats;
   final List<PlayerStat>? awayTeamPlayerStats;
 

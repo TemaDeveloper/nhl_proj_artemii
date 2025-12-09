@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
-import 'package:frontend_nhl/presentation/widgets/components/goalie_stat_card.dart';
 import 'package:frontend_nhl/presentation/widgets/components/play_score_row.dart';
 import 'package:frontend_nhl/presentation/widgets/components/player_points_row.dart';
 
@@ -19,9 +18,6 @@ class PlayerStats extends StatelessWidget {
     final homeTopPlayers = _getTopPlayersByPoints(game.homeTeamPlayerStats);
     final awayTopPlayers = _getTopPlayersByPoints(game.awayTeamPlayerStats);
     
-    // Get goalies
-    // final homeGoalie = game.homeTeamStartingGoalie;
-    // final awayGoalie = game.awayTeamStartingGoalie;
 
     return Card(
       elevation: 2,
@@ -38,39 +34,6 @@ class PlayerStats extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            
-            // Starting Goalies
-            // if (homeGoalie != null && awayGoalie != null)
-            //   Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Text(
-            //         'Starting Goalies',
-            //         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            //           fontWeight: FontWeight.w600,
-            //         ),
-            //       ),
-            //       const SizedBox(height: 12),
-            //       Row(
-            //         children: [
-            //           Expanded(
-            //             child: GoalieStatCard(
-            //               goalie: homeGoalie,
-            //               teamName: game.homeTeamName,
-            //             ),
-            //           ),
-            //           const SizedBox(width: 16),
-            //           Expanded(
-            //             child: GoalieStatCard(
-            //               goalie: awayGoalie,
-            //               teamName: game.awayTeamName,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //       const SizedBox(height: 24),
-            //     ],
-            //   ),
             
             // Top Scorers
             if ((homeScorers?.isNotEmpty ?? false) || (awayScorers?.isNotEmpty ?? false))

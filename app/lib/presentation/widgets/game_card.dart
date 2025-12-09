@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend_nhl/core/theme/app_colors.dart';
+import 'package:frontend_nhl/core/theme/app_text_styles.dart';
 import 'package:frontend_nhl/core/utils/date_time_utils.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/data/models/game_status.dart';
 import 'package:frontend_nhl/presentation/bloc/games/games_bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
-/// Card widget displaying a single game summary.
 class GameCard extends StatelessWidget {
   final Game game;
 
@@ -16,7 +16,7 @@ class GameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
@@ -63,16 +63,19 @@ class _GameStatusBadge extends StatelessWidget {
         ),
         child: Text(
           status.toDisplayString().toUpperCase(),
-          style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 11),
+          style: AppTextStyles.labelSmall.copyWith(
+            color: color,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
   }
 
   Color _getStatusColor() {
-    if (status.isLive) return Colors.red.shade700;
-    if (status.isFinal) return Colors.green.shade700;
-    return Colors.blueGrey;
+    if (status.isLive) return AppColors.gameLive;
+    if (status.isFinal) return AppColors.gameFinal;
+    return AppColors.gameScheduled;
   }
 }
 
@@ -134,7 +137,6 @@ class _TeamInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Loading logo for team: $teamName, URL: $teamLogoUrl');
     return Column(
       children: [
         // Team Logo
@@ -144,7 +146,7 @@ class _TeamInfo extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.grey.shade300, width: 1),
+            border: Border.all(color: AppColors.mediumGrey, width: 1),
           ),
           child: teamLogoUrl != null
               ? ClipOval(
@@ -154,29 +156,27 @@ class _TeamInfo extends StatelessWidget {
                             teamLogoUrl!,
                             fit: BoxFit.cover,
                             placeholderBuilder: (context) => Container(
-                              color: Colors.grey.shade200,
-                              child: Center(child: CircularProgressIndicator()),
+                              color: AppColors.lightGrey,
+                              child: const Center(child: CircularProgressIndicator()),
                             ),
                           ),
                         )
                       : Container(
-                          color: Colors.grey.shade200,
-                          child: Icon(Icons.sports_hockey, color: Colors.grey.shade400, size: 30),
+                          color: AppColors.lightGrey,
+                          child: const Icon(Icons.sports_hockey, color: AppColors.grey, size: 30),
                         ),
                 )
               : Container(
-                  color: Colors.grey.shade200,
-                  child: Icon(Icons.sports_hockey, color: Colors.grey.shade400, size: 30),
+                  color: AppColors.lightGrey,
+                  child: const Icon(Icons.sports_hockey, color: AppColors.grey, size: 30),
                 ),
         ),
 
         // Team Name
         Text(
           teamName,
-          style: TextStyle(
+          style: AppTextStyles.teamName.copyWith(
             fontWeight: isWinning ? FontWeight.bold : FontWeight.normal,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
           ),
           textAlign: TextAlign.center,
           maxLines: 2,
@@ -187,12 +187,10 @@ class _TeamInfo extends StatelessWidget {
         // Team Score
         Text(
           game.status.isScheduled ? (isHomeTeam ? 'HOME' : 'AWAY') : teamScore.toString(),
-          style: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontSize: 32,
+          style: AppTextStyles.gameScore.copyWith(
             color: game.status.isScheduled
-                ? Colors.blueGrey
-                : (isWinning ? Colors.black : Colors.grey.shade700),
+                ? AppColors.grey
+                : (isWinning ? AppColors.black : AppColors.darkGrey),
           ),
         ),
       ],
@@ -212,28 +210,31 @@ class _GameSeparator extends StatelessWidget {
         children: [
           Text(
             DateTimeUtils.formatTime(game.startTime),
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.blueGrey.shade700,
+            style: AppTextStyles.labelMedium.copyWith(
+              color: AppColors.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
-          Icon(Icons.schedule, color: Colors.blueGrey.shade500, size: 20),
+          Icon(Icons.schedule, color: AppColors.primary, size: 20),
         ],
       );
     }
 
-    return const Column(
+    return Column(
       children: [
         Text(
           'VS',
-          style: TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.bold),
+          style: AppTextStyles.labelLarge.copyWith(color: AppColors.grey),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           '-',
-          style: TextStyle(color: Colors.black54, fontSize: 32, fontWeight: FontWeight.w300),
+          style: AppTextStyles.bodyLarge.copyWith(
+            color: AppColors.mediumGrey,
+            fontSize: 32,
+            fontWeight: FontWeight.w300,
+          ),
         ),
       ],
     );
@@ -250,6 +251,9 @@ class _VenueInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Icon(Icons.location_on, size: 14, color: AppColors.grey),
+        const SizedBox(width: 4),
+        Text(venue, style: AppTextStyles.bodySmall),
         Icon(Icons.location_on, size: 14, color: Colors.grey[600]),
         const SizedBox(width: 4),
         Text(venue, style: TextStyle(fontSize: 12, color: Colors.grey[600])),

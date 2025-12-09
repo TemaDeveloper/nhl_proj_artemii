@@ -61,8 +61,6 @@ class _GameDetailView extends StatelessWidget {
               appBar: AppBar(
                 title: const Text('Game Details'),
                 centerTitle: true,
-                backgroundColor: Colors.blue.shade800,
-                foregroundColor: Colors.white,
               ),
               body: SingleChildScrollView(
                 child: Padding(

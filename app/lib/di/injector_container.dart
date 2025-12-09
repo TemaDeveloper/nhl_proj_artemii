@@ -20,18 +20,15 @@ Future<void> initDependencies() async {
   AppLogger.section('Initializing Dependencies');
   
 
-  // 1. Register AppRouter
   AppLogger.info('Registering AppRouter', tag: 'DI');
   getIt.registerLazySingleton<AppRouter>(() => AppRouter());
 
-  // 2. Register all repositories
   AppLogger.info('Registering GameRepository', tag: 'DI');
   getIt.registerLazySingleton<GameRepository>(() => FirestoreGameRepository());
 
   AppLogger.info('Registering TeamRepository', tag: 'DI');
   getIt.registerLazySingleton<TeamRepository>(() => FirestoreTeamRepository());
 
-  // 3. Register Use Cases
   AppLogger.info('Registering GetTodayGamesUseCase', tag: 'DI');
   getIt.registerLazySingleton<GetTodayGamesUseCase>(
     () => GetTodayGamesUseCase(getIt<GameRepository>()),
@@ -52,7 +49,6 @@ Future<void> initDependencies() async {
     () => GetTeamGamesUseCase(getIt<GameRepository>()),
   );
 
-  // 4. Register BLoCs
   AppLogger.info('Registering GamesBloc factory', tag: 'DI');
   getIt.registerFactory<GamesBloc>(() => GamesBloc(getIt<GetTodayGamesUseCase>()));
 

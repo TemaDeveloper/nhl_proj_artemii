@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_nhl/config/routes/app_navigation.dart';
 import 'package:frontend_nhl/config/routes/app_router.gr.dart';
+import 'package:frontend_nhl/core/constants/app_constants.dart';
+import 'package:frontend_nhl/core/theme/app_colors.dart';
+import 'package:frontend_nhl/core/theme/app_text_styles.dart';
 import 'package:frontend_nhl/di/injector_container.dart';
 import 'package:frontend_nhl/domain/entities/game.dart';
 import 'package:frontend_nhl/presentation/bloc/games/games_bloc.dart';
@@ -30,7 +33,6 @@ class _GamesListView extends StatelessWidget {
         context.router.push(
           GameDetailRoute(gameId: gameId, game: game), 
         );
-      // Add other navigation cases here if needed
     }
   }
 
@@ -46,8 +48,6 @@ class _GamesListView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('NHL Today'),
           centerTitle: true,
-          backgroundColor: Colors.blue.shade800,
-          foregroundColor: Colors.white,
         ),
         body: BlocBuilder<GamesBloc, GamesState>(
           builder: (context, state) {
@@ -80,11 +80,10 @@ class _GamesList extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async {
         context.read<GamesBloc>().add(const RefreshGamesEvent());
-        // Wait a moment for the refresh to start
-        await Future.delayed(const Duration(milliseconds: 500));
+        await Future.delayed(AppConstants.refreshIndicatorDelay);
       },
       child: ListView.builder(
-        padding: const EdgeInsets.only(top: 8, bottom: 16),
+        padding: AppConstants.listViewPadding,
         itemCount: games.length,
         itemBuilder: (context, index) => GameCard(game: games[index]),
       ),
@@ -96,20 +95,21 @@ class _EmptyGamesView extends StatelessWidget {
   const _EmptyGamesView();
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(AppConstants.defaultPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.sports_hockey, size: 64, color: Colors.grey[400]),
-            const SizedBox(height: 16),
+            Icon(Icons.sports_hockey, size: AppConstants.emptyStateIconSize, color: AppColors.grey),
+            const SizedBox(height: AppConstants.largeGap),
             Text(
               'No games scheduled for today',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.grey[600],
+              style: AppTextStyles.titleMedium.copyWith(
+                color: AppColors.grey,
               ),
             ),
           ],
@@ -128,23 +128,23 @@ class _ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(AppConstants.defaultPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
-            const SizedBox(height: 16),
+            Icon(Icons.error_outline, size: AppConstants.errorStateIconSize, color: AppColors.error),
+            const SizedBox(height: AppConstants.largeGap),
             Text(
               'Oops! Something went wrong',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: AppTextStyles.titleLarge,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppConstants.standardGap),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
+              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppConstants.xlargeGap),
             ElevatedButton.icon(
               onPressed: () {
                 context.read<GamesBloc>().add(const FetchTodayGamesEvent());
