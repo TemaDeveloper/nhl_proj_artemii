@@ -12,19 +12,6 @@ NHL Score Tracker delivers a polished mobile experience for hockey fans:
 - **Offline Support**: Cached game data available when internet is unavailable
 - **Fast Performance**: Optimized state management with BLoC pattern
 
-## Tech Stack
-
-- **Framework**: Flutter 3.x
-- **Language**: Dart 3.x
-- **State Management**: BLoC (Business Logic Component)
-- **Dependency Injection**: GetIt
-- **Navigation**: Auto Route
-- **Database**: Firebase Cloud Firestore (real-time backend)
-- **Authentication**: Firebase Authentication
-- **Local Storage**: Hive
-- **HTTP Client**: Dio
-- **Date/Time**: Intl, Moment packages
-
 ## Project Structure
 
 ```
@@ -382,20 +369,26 @@ Benefits:
 Routes are defined in `app_router.dart`:
 
 ```dart
-@MaterialAutoRouter(
-  routes: <AutoRoute>[
-    AutoRoute(page: GameListPage, initial: true),
-    AutoRoute(page: GameDetailPage),
-    AutoRoute(page: TeamPage),
-  ],
-)
+@singleton
+@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+class AppRouter extends $AppRouter {
+@override
+  List<AutoRoute> get routes => [
+        AutoRoute(page: GameListRoute.page, path: '/', initial: true),
+        AutoRoute(page: GameDetailRoute.page, path: '/games/:gameId'),
+        AutoRoute(page: TeamRoute.page, path: '/teams/:teamId'),
+      ];
+} 
 ```
 
 Navigation:
 ```dart
 context.router.push(GameDetailRoute(gameId: gameId));
-context.router.pop();
+context.read<GamesBloc>().add(GamesCardTappedEvent(gameId: game.id, game: game));
 ```
+
+Non-consitent navigation since I was running out of time I could come up only with the strange solution of resolution
+so I have decided to leave - 'context.router.push(GameDetailRoute(gameId: gameId));' as it is right now. 
 
 ## Styling Guidelines
 
@@ -482,35 +475,6 @@ flutter run
 4. **Firestore Queries**: Use indexes for complex queries
 5. **Pagination**: Load games in batches rather than all at once
 
-## Testing
-
-### Running Tests
-```bash
-# Run all tests
-flutter test
-
-# Run specific test file
-flutter test test/presentation/bloc/game_bloc_test.dart
-
-# Run with coverage
-flutter test --coverage
-```
-
-### Test Structure
-```
-test/
-├── presentation/
-│   └── bloc/
-│       ├── game_bloc_test.dart
-│       └── team_bloc_test.dart
-├── domain/
-│   └── usecases/
-│       └── get_games_usecase_test.dart
-└── data/
-    └── repositories/
-        └── game_repository_test.dart
-```
-
 ## Known Limitations & Future Work
 
 ### Current Limitations
@@ -564,23 +528,8 @@ test/
 4. Ensure `flutter analyze` passes
 5. Update documentation as needed
 
-## License
 
-This project is part of the NHL Score Tracker application.
 
-## Support
 
-For issues or questions:
-1. Check if Firestore has data (`games` collection)
-2. Verify Firebase configuration in `firebase_options.dart`
-3. Check Flutter/Dart version compatibility
-4. Review logs with `flutter run -v`
-
-## Resources
-
-- [Flutter Documentation](https://flutter.dev/docs)
-- [BLoC Pattern](https://bloclibrary.dev/)
-- [Clean Architecture](https://resocoder.com/flutter-clean-architecture)
-- [Firebase for Flutter](https://firebase.flutter.dev/)
 - [Material 3 Design](https://m3.material.io/)
 
