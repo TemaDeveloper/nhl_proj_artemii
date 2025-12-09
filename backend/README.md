@@ -631,6 +631,3 @@ Before reporting issues:
 - [ ] Network access to NHL API (`https://api-web.nhle.com/v1/`) confirmed
 - [ ] Service account has Firestore write permissions
 
-## License
-
-This project is part of the NHL Score Tracker application.
