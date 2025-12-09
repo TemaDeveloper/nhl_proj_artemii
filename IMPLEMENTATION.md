@@ -161,11 +161,6 @@ export function getDateRange(daysToIngest = 0) {
 }
 ```
 
-**Performance Characteristics**:
-- **100 days**: ~3500 games × 1 ms/write = ~3.5 seconds
-- **Firestore quota**: 50,000 writes/day (easily within limits)
-- **NHL API**: No rate limiting observed in testing
-
 **Production Deployment: GitHub Actions**
 
 ```yaml
@@ -228,7 +223,7 @@ jobs:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
 ```
 
-**Setup Instructions**:
+**Future Setup**:
 
 1. **Store Firebase credentials in GitHub**
    ```bash
@@ -240,18 +235,12 @@ jobs:
    # Paste entire JSON content
    ```
 
-2. **(Optional) Set up Slack notifications**
-   ```bash
-   # Create Slack webhook at https://api.slack.com/messaging/webhooks
-   # Add secret: SLACK_WEBHOOK with webhook URL
-   ```
-
-3. **Test the workflow**
+2. **Test the workflow**
    - Go to GitHub → Actions → "Daily NHL Data Ingest"
    - Click "Run workflow" → Select branch → Run
    - Monitor execution in real-time
 
-4. **Schedule automatically**
+3. **Schedule automatically**
    - Workflow runs daily at 9:00 AM UTC
    - Adjust cron schedule as needed
    - No additional setup required
@@ -272,48 +261,7 @@ Ubuntu Runner (GitHub's infrastructure)
 GameService ingests latest games
     ↓
 Firestore stores/updates games
-    ↓
-(Optional) Send Slack notification
 ```
-
-**Advantages**:
-- ✅ **Free**: GitHub includes 2000 minutes/month (this uses ~5 minutes/day)
-- ✅ **Simple**: No infrastructure to manage or pay for
-- ✅ **Reliable**: GitHub's monitoring and automatic retries
-- ✅ **Transparent**: Full logs visible in GitHub UI
-- ✅ **Manual Trigger**: Can run job anytime via UI for backfills
-- ✅ **No Dependencies**: Works with just your GitHub repo
-- ✅ **Notifications**: Built-in Slack integration for alerts
-
-**Cost Analysis**:
-- Action execution: ~5 minutes/day × 30 days = 150 minutes/month
-- Free tier includes 2000 minutes/month
-- **Total cost: $0** ✅
-
-**Monitoring**:
-```
-GitHub → Actions → Daily NHL Data Ingest → View logs
-```
-
-Each workflow run shows:
-- Start and end time
-- Step-by-step execution
-- Success/failure status
-- Duration and resource usage
-
-**Backfill Example** (Manual one-time run):
-
-If you need to ingest historical data:
-1. Go to GitHub Actions
-2. Click "Daily NHL Data Ingest"
-3. Click "Run workflow"
-4. Manually modify the schedule temporarily:
-   ```yaml
-   - name: Ingest historical data
-     run: |
-       cd backend
-       node src/index.js 30  # Ingest last 30 days
-   ```
 
 **Decision Rationale**: Chose GitHub Actions because:
 1. **Best for open source projects** — free, no account setup
@@ -345,7 +293,6 @@ export async function ingestTeamStandings(season = 20242025) {
 - ✅ Game documents have team names but not full standings
 - ✅ Team screen needs W-L-O record (see Part 3)
 - ✅ Separates concerns: games vs. team metadata
-- ❌ Could have calculated from games alone (more complex)
 
 ---
 
@@ -1169,11 +1116,6 @@ Text(DateFormat('HH:mm').format(game.startTime.toLocal()))
    - Example code snippets (demonstrating patterns)
    - Error message formatting
 
-3. **Testing Structure**
-   - Generated test templates for BLoCs
-   - Mock object generation
-   - Test case suggestions
-
 ### ❌ NOT Using AI (Human Decision-Making)
 1. **Architecture Selection**
    - Chose clean architecture (considered alternatives)
@@ -1204,46 +1146,44 @@ Text(DateFormat('HH:mm').format(game.startTime.toLocal()))
 
 ## How I Approached This Challenge
 
-### Phase 1: Requirements Analysis (1 hour)
+### Phase 1: Requirements Analysis 
 - Read requirements carefully
 - Identified three distinct parts
 - Noted optional vs. required features
 - Checked feasibility of each requirement
 
-### Phase 2: Technology Selection (30 min)
+### Phase 2: Technology Selection 
 - Drew out architecture diagrams
 - Selected tech stack (Node, Flutter, Firebase)
 - Evaluated trade-offs for each choice
 - Confirmed tools are production-ready
 
-### Phase 3: Backend Implementation (2 hours)
+### Phase 3: Backend Implementation 
 - Built modular service architecture
 - Implemented idempotent ingestion
 - Added graceful error handling
 - Extended with team data ingestion
 - Created comprehensive README
 
-### Phase 4: Frontend Implementation (3 hours)
+### Phase 4: Frontend Implementation 
 - Set up Flutter project structure (clean architecture)
 - Implemented BLoC state management
 - Built game list, detail, and team screens
 - Added design system (colors, typography)
 - Tested with real Firestore data
 
-### Phase 5: Integration & Polish (1 hour)
+### Phase 5: Integration & Polish 
 - Verified backend-frontend data flow
 - Tested error scenarios
 - Added design system consistency
 - Updated documentation
 
-### Phase 6: Reflection & Documentation (1 hour)
+### Phase 6: Reflection & Documentation 
 - Wrote this implementation report
 - Documented decisions and trade-offs
 - Listed improvements and limitations
 - Prepared for walkthrough
-
-**Total Time**: ~8 hours
-
+  
 ---
 
 ## Code Quality Principles Applied
@@ -1381,8 +1321,9 @@ npm run ingest:today
 ```bash
 cd app
 flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
 flutterfire configure --project=nhl-project-75e9c
-flutter run
+flutter run -d <YOUR DEVICE ID>
 ```
 
 ### Architecture
@@ -1396,8 +1337,4 @@ flutter run
 - Backend: `backend/README.md` (data model and setup)
 - Frontend: `app/README.md` (architecture and usage)
 
----
 
-**Document Version**: 1.0  
-**Last Updated**: December 8, 2025  
-**Status**: Ready for Review
