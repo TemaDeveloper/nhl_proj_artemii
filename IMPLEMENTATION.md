@@ -1337,4 +1337,12 @@ flutter run -d <YOUR DEVICE ID>
 - Backend: `backend/README.md` (data model and setup)
 - Frontend: `app/README.md` (architecture and usage)
 
+#Games Collection:
+ - ✅ Frontend: Read-only (anyone can view)
+ - ✅ Backend: Write-only (service account can update)
+
+#Teams Collection:
+ - ✅ Frontend: Read-only (anyone can view)
+ - ✅ Backend: Write-only (service account can update)
+
 
